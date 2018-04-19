@@ -5,9 +5,42 @@ use Config;
 use App;
 use Debugbar;
 use IanLChapman\PigLatinTranslator\Parser;
-use Carbon\Carbon;
+use App\Book;
 class PracticeController extends Controller
 {
+    public function practice8()
+    {
+        $book = new Book();
+        $books = $book->where('title', 'LIKE', '%Harry Potter%')->get();
+
+        if ($books->isEmpty()) {
+            dump('No matches found');
+        } else {
+            foreach ($books as $book) {
+                dump($book->title);
+            }
+        }
+    }
+
+    public function practice7()
+    {
+        $book = new Book();
+        $book->title = 'Harry Potter and the Sorcerer\'s Stone';
+        $book->author = 'J.K. Rowling';
+        $book->published_year = 1997;
+        $book->cover_url = 'http://prodimage.images-bn.com/pimages/9780590353427_p0_v1_s484x700.jpg';
+        $book->purchase_url = 'http://www.barnesandnoble.com/w/harry-potter-and-the-sorcerers-stone-j-k-rowling/1100036321?ean=9780590353427';
+        $book->save();
+
+        dump($book);
+    }
+
+    public function practice6()
+    {
+        return view('xyz');
+    }
+
+
     public function practice5()
     {
         $translator = new Parser();
